@@ -18,10 +18,15 @@ public class PlayerLook : MonoBehaviour {
     private float yaw;
 
     private Vector3 upVector;
+    private Vector3 targetUpVector;
 
     private Quaternion GetRotation() {
         Vector3 lookDirection = Quaternion.Euler(pitch, yaw, 0f) * Vector3.forward;
         return Quaternion.LookRotation(lookDirection, upVector);
+    }
+
+    public void SetTargetUpVector(Vector3 target) {
+        targetUpVector = target.normalized;
     }
 
     private void Start() {
@@ -52,6 +57,8 @@ public class PlayerLook : MonoBehaviour {
         cameraHolder.position = playerHead.position;
 
         orientation.rotation = Quaternion.Euler(0, yaw, 0);
+
+        upVector = Vector3.Slerp(upVector, targetUpVector, 0.1f);
     }
 
     private void Awake() {

@@ -25,7 +25,7 @@ public class PlayerMovement : MonoBehaviour {
     [Header("Wall Running")]
     [SerializeField] private float wallRunSpeedBoost;
     [SerializeField] private float wallRunMaxSpeed;
-    // [SerializeField] private float wallRunTilt = 20f;
+    [SerializeField] private float wallRunTilt = 20f;
     [SerializeField] private float maxWallRunTime = 5f;
     [SerializeField] private float wallRunMinSpeed = 1f;
 
@@ -193,8 +193,12 @@ public class PlayerMovement : MonoBehaviour {
 
         // Determine which way to rotate camera
         float rightOrLeft = Mathf.Sign(Vector3.Dot(wallNormal, orientation.right));
-        
+
         // lookScript.TargetRoll = -wallRunTilt * rightOrLeft;
+
+        PlayerLook.instance.SetTargetUpVector(Vector3.up + wallNormal * Mathf.Tan(wallRunTilt * Mathf.Deg2Rad));
+
+        // Calculate
 
         // Direct ground velocity along the wall tangent
         float groundSpeed = GroundSpeed;
@@ -352,6 +356,10 @@ public class PlayerMovement : MonoBehaviour {
 
         else if (!isWallRunning) {
             MovePlayerOnGround();
+        }
+
+        if (!isWallRunning) {
+            PlayerLook.instance.SetTargetUpVector(Vector3.up);
         }
 
         if (!Input.GetKey(jumpKey)) justJumped = false;
