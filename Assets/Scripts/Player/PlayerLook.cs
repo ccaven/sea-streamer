@@ -8,6 +8,7 @@ public class PlayerLook : MonoBehaviour {
     [Header("References")]
     public Transform cameraHolder;
     public Transform playerHead;
+    public Transform orientation;
 
     [Header("Settings")]
     public float sensitivity;
@@ -49,6 +50,8 @@ public class PlayerLook : MonoBehaviour {
         // Update camera's position and rotation
         cameraHolder.rotation = GetRotation();
         cameraHolder.position = playerHead.position;
+
+        orientation.rotation = Quaternion.Euler(0, yaw, 0);
     }
 
     private void Awake() {
