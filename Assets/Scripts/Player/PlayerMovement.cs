@@ -74,6 +74,13 @@ public class PlayerMovement : MonoBehaviour {
     /// </summary>
     private float JumpForce { get => Mathf.Sqrt(2f * Mathf.Abs(Physics.gravity.y) * jumpHeight); }
 
+    public void ScaleSpeed(float scale) {
+        groundAcceleration *= scale;
+        maximumGroundSpeed *= scale;
+        airAcceleration *= scale;
+        maximumAirSpeed *= scale;
+    }
+
     /// <summary>
     /// Translate the key presses from the user into a useable direction in 3d space.
     /// </summary>

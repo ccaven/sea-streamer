@@ -47,8 +47,8 @@ public class PlayerLook : MonoBehaviour {
         float mouseX = Input.GetAxisRaw("Mouse X") * sensitivity;
         float mouseY = Input.GetAxisRaw("Mouse Y") * sensitivity;
 
-        yaw += mouseX * Time.deltaTime;
-        pitch -= mouseY * Time.deltaTime;
+        yaw += mouseX;
+        pitch -= mouseY;
 
         pitch = Mathf.Clamp(pitch, -maxPitch, maxPitch);
 
