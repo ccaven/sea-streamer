@@ -14,6 +14,8 @@ public class PowerupController : MonoBehaviour {
 
     public PowerupType type;
 
+    public GlassDoorController door;
+
     public void Activate() {
 
         // Activate particle system
@@ -28,6 +30,12 @@ public class PowerupController : MonoBehaviour {
         
         }
 
+    }
+
+    private void OnTriggerEnter(Collider other) {
+        if (door) {
+            door.Activate();
+        }   
     }
 
     private void Awake() {
